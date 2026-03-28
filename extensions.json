@@ -10,6 +10,15 @@
     },
     {
         "id": 2,
+        "name": "Rhythm Helper",
+        "desc": "Detect Beats per minute with a seperate timer",
+        "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/osu.js",
+        "icon": "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIxNTAuMTIwMzIiIGhlaWdodD0iMTczLjM0Mzk5IiB2aWV3Qm94PSIwLDAsMTUwLjEyMDMyLDE3My4zNDM5OSI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI1OS45Mzk4NSwtOTMuMzI4KSI+PGcgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIj48cGF0aCBkPSJNMjYzLjY4OTg1LDEzOC44MjkwN2w3MS4zMTAxNiwtNDEuMTcwOTRsNzEuMzEwMTYsNDEuMTcwOTR2ODIuMzQxODZsLTcxLjMxMDE2LDQxLjE3MDk0bC03MS4zMTAxNiwtNDEuMTcwOTR6IiBmaWxsLW9wYWNpdHk9IjAuMDUwOTgiIGZpbGw9IiMwZDU0MTEiIHN0cm9rZT0iIzAwZWJmZiIgc3Ryb2tlLXdpZHRoPSI3LjUiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiLz48cGF0aCBkPSJNMjYzLjY4OTg1LDEzOC44MjkwN2w3MS4zMTAxNiwtNDEuMTcwOTRsNzEuMzEwMTYsNDEuMTcwOTR2ODIuMzQxODZsLTcxLjMxMDE2LDQxLjE3MDk0bC03MS4zMTAxNiwtNDEuMTcwOTR6IiBmaWxsPSIjZTA4Y2ZmIiBzdHJva2U9IiNmZmNlZjciIHN0cm9rZS13aWR0aD0iNy41IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIi8+PHBhdGggZD0iTTI3NS4wNjA2NCwxODBjMCwtMzMuMTAzNiAyNi44MzU3NywtNTkuOTM5MzcgNTkuOTM5MzcsLTU5LjkzOTM3YzMzLjEwMzYsMCA1OS45MzkzNywyNi44MzU3NyA1OS45MzkzNyw1OS45MzkzN2MwLDMzLjEwMzYgLTI2LjgzNTc3LDU5LjkzOTM3IC01OS45MzkzNyw1OS45MzkzN2MtMzMuMTAzNiwwIC01OS45MzkzNywtMjYuODM1NzcgLTU5LjkzOTM3LC01OS45MzkzN3oiIGZpbGw9IiNlMDhjZmYiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIwIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIi8+PHBhdGggZD0iTTMwOS4zMzYwNSwyMTcuODQ4MTR2MHYweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjcuNSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIvPjxnIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI3LjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0zMjguNDg3ODUsMjAxLjg0MzZjLTEuNjc2MjYsMS41MzAyMSAtMy45MzU0NiwyLjQyMTE3IC02LjM3OTgxLDIuMzA5OTljLTIuNDM5NzMsLTAuMTExMTQgLTQuNjA4NDYsLTEuMjAzNzcgLTYuMTQyODgsLTIuODc5OTRjLTEuNTMwMjEsLTEuNjc2MjYgLTIuNDIxMTcsLTMuOTM1NDYgLTIuMzEwMTIsLTYuMzc5NGMwLjExMTE4LC0yLjQ0NDM2IDEuMjAzOTQsLTQuNjEzNSAyLjg4MDA3LC02LjE0MzI5YzEuNjgwMzMsLTEuNTI5ODcgMy45Mzk1MywtMi40MjA4MyA2LjM3OTQsLTIuMzEwMTJjMi40NDQyMiwwLjExMTYgNC42MTMzOCwxLjIwNDM3IDYuMTQzMjgsMi44ODAwN2MxLjUyOTc5LDEuNjc2MTMgMi40MjExNywzLjkzNTQ2IDIuMzA5NTcsNi4zNzk2OGMtMC4xMTExOCwyLjQ0NDM2IC0xLjIwMzgxLDQuNjEzMDkgLTIuODc5NTIsNi4xNDI5OXoiLz48cGF0aCBkPSJNMzQ3LjM1MzQ1LDE0NS40MTE0MWwtMTYuNjIzODMsNTEuNzQzMzYiLz48cGF0aCBkPSJNMzUyLjIxODI2LDE2My42MTQwOWMtMS43MjEyNCwtMy42MjEwNSAtNC4xMTU4MSwtNi44NzkzMiAtNy4wNTY0MSwtOS42MDEwNGwyLjYxNTE1LC04LjQ3MDg3YzIuNDc0OTUsMy4wMjc5NiA0LjU2NTM4LDYuMzU0NzMgNi4yMjE4NCw5LjkwMDA5YzMuODEyMDUsNy41OTI3NiAyLjk0NTM4LDE2LjY5NjIyIC0yLjIyNTEzLDIzLjQzNjQ1YzEuNTczNTIsLTQuOTQ2NjEgMS43MjYxMywtMTAuMjM0NSAwLjQ0NDU1LC0xNS4yNjQ2M3oiLz48L2c+PHBhdGggZD0iTTI4Ny45NTYzLDE4MGMwLC0yNS45ODE1NCAyMS4wNjIxOSwtNDcuMDQzNzEgNDcuMDQzNzEsLTQ3LjA0MzcxYzI1Ljk4MTU0LDAgNDcuMDQzNzEsMjEuMDYyMTkgNDcuMDQzNzEsNDcuMDQzNzFjMCwyNS45ODE1NCAtMjEuMDYyMTgsNDcuMDQzNzEgLTQ3LjA0MzcxLDQ3LjA0MzcxYy0yNS45ODE1NCwwIC00Ny4wNDM3MSwtMjEuMDYyMTggLTQ3LjA0MzcxLC00Ny4wNDM3MXoiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI3LjUiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiLz48L2c+PC9nPjwvc3ZnPjwhLS1yb3RhdGlvbkNlbnRlcjo3NS4wNjAxNDUwMDAwMDAwMzo4Ni42NzE5OTkxOTUxMTQ2NS0tPg==",
+        "version": 1,
+        "badge": "ass"
+    }
+    {
+        "id": 3,
         "name": "Morse Code",
         "desc": "An extension to do morse code translation",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/MorseCode.js",
@@ -17,7 +26,7 @@
         "version": 1.0
     },
     {
-        "id": 3,
+        "id": 4,
         "name": "Toolbar Buttons",
         "desc": "Create new buttons on the toolbar.",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/toolbarbuttons.js",
@@ -25,7 +34,7 @@
         "version": 1.0
     },
     {
-        "id": 4,
+        "id": 5,
         "name": "Jiggle Physics",
         "desc": "Make your sprites go boioioioing",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/Jiggles.js",
@@ -34,7 +43,7 @@
         "badge": "ass"
     },
     {
-        "id": 5,
+        "id": 6,
         "name": "Tweakpane (Forked)",
         "desc": "Use tweakpane to make dynamic GUIs in your project.",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/tweakplane.js",
@@ -43,7 +52,7 @@
         "badge": "recommended"
     },
     {
-        "id": 6,
+        "id": 7,
         "name": "Osu! Maps",
         "desc": "Convert .osu maps into readable and usable json!",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/osu.js",
