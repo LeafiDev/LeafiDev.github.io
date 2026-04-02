@@ -5,7 +5,16 @@ class SchaleDB {
   constructor() {
     this.students = null;
     this.selectedStudent = null;
+    this.totalAssaultRaids = null;
+    this.grandAssaultRaids = null;
+    this.finalRestrictionRaids = null;
+    this.selectedRaid = null;
     this.dataURL = 'https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/data/en/students.min.json';
+    this.raidsURL = 'https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/data/en/raids.min.json';
+    
+    // Automatically load databases on extension startup
+    this.loadStudents();
+    this.loadRaids();
   }
 
   getInfo() {
@@ -26,12 +35,12 @@ class SchaleDB {
         {
           opcode: 'loadStudents',
           blockType: Scratch.BlockType.COMMAND,
-          text: 'load student data'
+          text: 'Load Database'
         },
         {
           opcode: 'getStudentCount',
           blockType: Scratch.BlockType.REPORTER,
-          text: 'total students loaded'
+          text: 'Student Count'
         },
         {
           opcode: 'setSelectedStudent',
@@ -50,46 +59,164 @@ class SchaleDB {
           text: 'Student Info'
         },
         {
-          opcode: 'getSelectedStudentName',
+          opcode: 'getSelectedStudentProperty',
           blockType: Scratch.BlockType.REPORTER,
-          text: 'selected student name'
+          text: 'Get General Information [PROPERTY]',
+          arguments: {
+            PROPERTY: {
+              type: Scratch.ArgumentType.STRING,
+              menu: 'propertyMenu'
+            }
+          }
         },
         {
-          opcode: 'getSelectedStudentSchool',
+          opcode: 'getSelectedStudentStats',
           blockType: Scratch.BlockType.REPORTER,
-          text: 'selected student school'
+          text: 'Get Other Stats [STAT]',
+          arguments: {
+            STAT: {
+              type: Scratch.ArgumentType.STRING,
+              menu: 'statsMenu'
+            }
+          }
         },
         {
-          opcode: 'getSelectedStudentWeapon',
+          opcode: 'getIndoorCondition',
           blockType: Scratch.BlockType.REPORTER,
-          text: 'selected student weapon'
+          text: 'Indoor Condition'
         },
         {
-          opcode: 'getSelectedStudentAttackType',
+          opcode: 'getCityCondition',
           blockType: Scratch.BlockType.REPORTER,
-          text: 'selected student attack type'
+          text: 'City Condition'
         },
         {
-          opcode: 'getSelectedStudentShieldType',
+          opcode: 'getOutdoorCondition',
           blockType: Scratch.BlockType.REPORTER,
-          text: 'selected student shield type'
+          text: 'Outdoor Condition'
         },
         '---',
         {
-          opcode: 'wait1',
+          opcode: 'TA',
           blockType: Scratch.BlockType.LABEL,
-          text: 'More soon...'
+          text: 'Total Assault'
         },
         {
-          opcode: 'wait2',
-          blockType: Scratch.BlockType.LABEL,
-          text: 'ᓀ‸ᓂ'
+          opcode: 'loadRaids',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'Load Raids Database'
         },
+        {
+          opcode: 'getTARaidCount',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'Total Assault Raid Count'
+        },
+        {
+          opcode: 'setSelectedTARaid',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'Load Total Assault raid info for [TARAID]',
+          arguments: {
+            TARAID: {
+              type: Scratch.ArgumentType.STRING,
+              menu: 'taRaidMenu'
+            }
+          }
+        },
+        {
+          opcode: 'getSelectedTARaidProperty',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'Get Total Assault Raid [TRIPROPERTY]',
+          arguments: {
+            TRIPROPERTY: {
+              type: Scratch.ArgumentType.STRING,
+              menu: 'taRaidPropertyMenu'
+            }
+          }
+        }
       ],
       menus: {
         studentMenu: {
           acceptReporters: true,
           items: 'getStudentNames'
+        },
+        propertyMenu: {
+          acceptReporters: true,
+          items: [
+            { text: 'Name', value: 'Name' },
+            { text: 'School', value: 'School' },
+            { text: 'Weapon', value: 'WeaponType' },
+            { text: 'Attack Type', value: 'BulletType' },
+            { text: 'Armor Type', value: 'ArmorType' },
+            { text: 'Star Grade', value: 'StarGrade' },
+            { text: 'Position', value: 'Position' },
+            { text: 'Tactic Role', value: 'TacticRole' },
+            { text: 'Squad Type', value: 'SquadType' }
+          ]
+        },
+        statsMenu: {
+          acceptReporters: true,
+          items: [
+            { text: 'Max HP (Lv100)', value: 'MaxHP100' },
+            { text: 'Max HP (Lv1)', value: 'MaxHP1' },
+            { text: 'Attack Power (Lv100)', value: 'AttackPower100' },
+            { text: 'Attack Power (Lv1)', value: 'AttackPower1' },
+            { text: 'Defense Power (Lv100)', value: 'DefensePower100' },
+            { text: 'Defense Power (Lv1)', value: 'DefensePower1' },
+            { text: 'Heal Power (Lv100)', value: 'HealPower100' },
+            { text: 'Heal Power (Lv1)', value: 'HealPower1' },
+            { text: 'Accuracy Point', value: 'AccuracyPoint' },
+            { text: 'Dodge Point', value: 'DodgePoint' },
+            { text: 'Critical Point', value: 'CriticalPoint' },
+            { text: 'Critical Damage Rate', value: 'CriticalDamageRate' },
+            { text: 'Stability Point', value: 'StabilityPoint' },
+            { text: 'Ammo Count', value: 'AmmoCount' },
+            { text: 'Ammo Cost', value: 'AmmoCost' },
+            { text: 'Range', value: 'Range' },
+            { text: 'Regen Cost', value: 'RegenCost' }
+          ]
+        },
+        taRaidMenu: {
+          acceptReporters: true,
+          items: 'getTARaidNames'
+        },
+        taRaidPropertyMenu: {
+          acceptReporters: true,
+          items: [
+            { text: 'Raid Name', value: 'PathName' },
+            { text: 'Group Name', value: 'GroupName' },
+            { text: 'ID', value: 'Id' },
+            { text: 'Faction', value: 'Faction' },
+            { text: 'Terrain', value: 'Terrain' },
+            { text: 'Bullet Type', value: 'BulletType' },
+            { text: 'Armor Type', value: 'ArmorType' },
+            { text: 'Max Difficulty', value: 'MaxDifficulty' }
+          ]
+        },
+        taDifficultyMenu: {
+          acceptReporters: true,
+          items: [
+            { text: 'NORMAL', value: '1' },
+            { text: 'HARD', value: '2' },
+            { text: 'VERYHARD', value: '3' },
+            { text: 'HARDCORE', value: '4' },
+            { text: 'EXTREME', value: '5' },
+            { text: 'INSANE', value: '6' },
+            { text: 'TORMENT', value: '7' }
+          ]
+        },
+        taBossStatMenu: {
+          acceptReporters: true,
+          items: [
+            { text: 'Level', value: 'Level' },
+            { text: 'Max HP', value: 'MaxHP' },
+            { text: 'Attack', value: 'Attack' },
+            { text: 'Defense', value: 'Defense' },
+            { text: 'Accuracy', value: 'Accuracy' },
+            { text: 'Dodge', value: 'Dodge' },
+            { text: 'Critical Rate', value: 'CriticalRate' },
+            { text: 'Block Rate', value: 'BlockRate' },
+            { text: 'Penetration Rate', value: 'PenetrationRate' }
+          ]
         }
       }
     };
@@ -101,6 +228,29 @@ class SchaleDB {
       .then(data => {
         this.students = data;
         return `Loaded ${data.length} students`;
+      })
+      .catch(error => {
+        return `Error: ${error.message}`;
+      });
+  }
+
+  loadRaids() {
+    return fetch(this.raidsURL)
+      .then(response => response.json())
+      .then(data => {
+        const allRaids = data.Raid || [];
+        
+        // Categorize raids by ID range or other properties
+        // Adjust these ranges based on actual raid IDs
+        this.totalAssaultRaids = allRaids.filter(r => r.Id >= 1 && r.Id < 1000);
+        this.grandAssaultRaids = allRaids.filter(r => r.Id >= 1000 && r.Id < 100000);
+        this.finalRestrictionRaids = allRaids.filter(r => r.Id >= 100000);
+        
+        const taCount = this.totalAssaultRaids.length;
+        const gaCount = this.grandAssaultRaids.length;
+        const frCount = this.finalRestrictionRaids.length;
+        
+        return `Loaded TA: ${taCount}, GA: ${gaCount}, FR: ${frCount}`;
       })
       .catch(error => {
         return `Error: ${error.message}`;
@@ -130,28 +280,149 @@ class SchaleDB {
     return 'Student not found';
   }
 
-  getSelectedStudentName() {
-    return this.selectedStudent ? this.selectedStudent.Name : 'No student selected';
+  getSelectedStudentProperty(args) {
+    if (!this.selectedStudent) {
+      return 'No student selected';
+    }
+    const property = args.PROPERTY;
+    const value = this.selectedStudent[property];
+    return value !== undefined ? value : 'Unknown';
   }
 
-  getSelectedStudentSchool() {
-    return this.selectedStudent ? (this.selectedStudent.School || 'Unknown') : 'No student selected';
+  getSelectedStudentStats(args) {
+    if (!this.selectedStudent) {
+      return 'No student selected';
+    }
+    const stat = args.STAT;
+    const value = this.selectedStudent[stat];
+    return value !== undefined ? value : 'Unknown';
   }
 
-  getSelectedStudentWeapon() {
-    return this.selectedStudent ? (this.selectedStudent.WeaponType || 'Unknown') : 'No student selected';
+  convertAdaptationToGrade(value) {
+    const grades = {
+      0: 'D',
+      1: 'C',
+      2: 'B',
+      3: 'A',
+      4: 'S',
+      5: 'SS'
+    };
+    return grades[value] || 'Unknown';
   }
 
-  getSelectedStudentAttackType() {
-    return this.selectedStudent ? (this.selectedStudent.BulletType || 'Unknown') : 'No student selected';
+  getIndoorCondition() {
+    if (!this.selectedStudent) {
+      return 'No student selected';
+    }
+    const value = this.selectedStudent['IndoorBattleAdaptation'];
+    return value !== undefined ? this.convertAdaptationToGrade(value) : 'Unknown';
   }
 
-  getSelectedStudentShieldType() {
-    return this.selectedStudent ? (this.selectedStudent.ArmorType || 'Unknown') : 'No student selected';
+  getCityCondition() {
+    if (!this.selectedStudent) {
+      return 'No student selected';
+    }
+    const value = this.selectedStudent['StreetBattleAdaptation'];
+    return value !== undefined ? this.convertAdaptationToGrade(value) : 'Unknown';
   }
 
-  getSelectedStudentInfo() {
-    return this.selectedStudent ? JSON.stringify(this.selectedStudent) : 'No student selected';
+  getOutdoorCondition() {
+    if (!this.selectedStudent) {
+      return 'No student selected';
+    }
+    const value = this.selectedStudent['OutdoorBattleAdaptation'];
+    return value !== undefined ? this.convertAdaptationToGrade(value) : 'Unknown';
+  }
+
+  getTARaidCount() {
+    return this.totalAssaultRaids ? this.totalAssaultRaids.length : 0;
+  }
+
+  getTARaidNames() {
+    if (!this.totalAssaultRaids || this.totalAssaultRaids.length === 0) {
+      return [{ text: 'Load raids first', value: '' }];
+    }
+    return this.totalAssaultRaids.map(r => ({
+      text: r.PathName || `Raid ${r.Id}`,
+      value: r.PathName || `Raid ${r.Id}`
+    }));
+  }
+
+  setSelectedTARaid(args) {
+    const raid = this.findTARaid(args.TARAID);
+    if (raid) {
+      this.selectedRaid = raid;
+      return `Selected ${raid.PathName || raid.Id}`;
+    }
+    return 'Raid not found';
+  }
+
+  getSelectedTARaidProperty(args) {
+    if (!this.selectedRaid) {
+      return 'No raid selected';
+    }
+    const property = args.TRIPROPERTY;
+    const value = this.selectedRaid[property];
+    return value !== undefined ? value : 'Unknown';
+  }
+
+  findTARaid(name) {
+    if (!this.totalAssaultRaids || this.totalAssaultRaids.length === 0) {
+      return null;
+    }
+    const searchName = name.toLowerCase();
+    return this.totalAssaultRaids.find(r =>
+      (r.PathName && r.PathName.toLowerCase() === searchName) ||
+      r.Id.toString() === name
+    );
+  }
+
+  getTABossStatByDifficulty(args) {
+    if (!this.selectedRaid) {
+      return 'No raid selected';
+    }
+    
+    const difficulty = parseInt(args.DIFFICULTY);
+    const stat = args.TASTAT;
+    
+    if (difficulty < 1 || difficulty > 7) {
+      return 'Invalid difficulty';
+    }
+    
+    // Access boss stats from EnemyList array
+    if (this.selectedRaid.EnemyList && Array.isArray(this.selectedRaid.EnemyList)) {
+      const enemy = this.selectedRaid.EnemyList[difficulty - 1];
+      if (enemy) {
+        const value = enemy[stat];
+        if (value !== undefined) {
+          return value;
+        }
+      }
+    }
+    
+    return 'Stat not found';
+  }
+
+  debugEnemyList() {
+    if (!this.selectedRaid) {
+      return 'No raid selected';
+    }
+    if (!this.selectedRaid.EnemyList || this.selectedRaid.EnemyList.length === 0) {
+      return 'EnemyList is empty';
+    }
+    // Show first few keys and their values
+    const keys = Object.keys(this.selectedRaid);
+    let result = 'Top-level keys: ';
+    for (let i = 0; i < Math.min(5, keys.length); i++) {
+      const key = keys[i];
+      const val = this.selectedRaid[key];
+      if (typeof val === 'object') {
+        result += `${key}:[obj], `;
+      } else {
+        result += `${key}:${val}, `;
+      }
+    }
+    return result + '...See console for full list';
   }
 
   findStudent(name) {
