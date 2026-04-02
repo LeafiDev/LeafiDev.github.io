@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name": "Mod.io Extension",
         "desc": "An extension to support Mod.io REST API.",
         "link": "https://raw.githubusercontent.com/LeafiDev/TW-PM-Modioextenstion/refs/heads/main/modio.js",
@@ -9,6 +10,7 @@
         "conditions": ["Nitrobolt: Must be loaded as a local file"]
     },
     {
+        "id": 2,
         "name": "SchaleDB",
         "desc": "An extension to get extensive data from Students, Raids, and More for the Mobile/PC game Blue Archive.",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/SchaleDB.js",
@@ -17,6 +19,7 @@
         "badge": "beta"
     },
     {
+        "id": 3,
         "name": "Morse Code",
         "desc": "An extension to do morse code translation",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/MorseCode.js",
@@ -24,6 +27,7 @@
         "version": 1.0
     },
     {
+        "id": 4,
         "name": "Toolbar Buttons",
         "desc": "Create new buttons on the toolbar.",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/toolbarbuttons.js",
@@ -31,6 +35,7 @@
         "version": 1.0
     },
     {
+        "id": 5,
         "name": "Rhythm Helper",
         "desc": "Detect Beats per minute with a seperate timer",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/osu.js",
@@ -39,6 +44,7 @@
         "badge": "ass"
     },
     {
+        "id": 6,
         "name": "Jiggle Physics",
         "desc": "Make your sprites go boioioioing",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/Jiggles.js",
@@ -47,6 +53,7 @@
         "badge": "ass"
     },
     {
+        "id": 7,
         "name": "Tweakpane (Forked)",
         "desc": "Use tweakpane to make dynamic GUIs in your project.",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/tweakplane.js",
@@ -56,6 +63,7 @@
         "conditions": ["Nitrobolt: Must be loaded as a local file"]
     },
     {
+        "id": 8,
         "name": "Osu! Maps",
         "desc": "Convert .osu maps into readable and usable json!",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/osu.js",
@@ -65,6 +73,7 @@
         "conditions": ["Nitrobolt: Must be loaded as a local file"]
     },
     {
+        "id": 9,
         "name": "Lament Percents",
         "desc": "Calculate that weird math that gacha games do!",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/LamentPercents.js",
@@ -72,6 +81,7 @@
         "version": 1.0
     },
     {
+        "id": 10,
         "name": "Viewport Mouse",
         "desc": "Extra set of mouse coordinates that are relative to the viewport instead of the canvas.",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/RawMouse.js",
