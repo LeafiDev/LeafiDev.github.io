@@ -339,19 +339,20 @@ class OsuMap {
 
   // Difficulty getters
   getCS() {
-    return this.mapData.difficulty.CircleSize || 0;
+    if (this.mapData.difficulty) return this.mapData.difficulty.CircleSize || 0;
   }
 
   getAR() {
-    return this.mapData.difficulty.ApproachRate || 0;
+    if (this.mapData.difficulty) return this.mapData.difficulty.ApproachRate || 0;
   }
 
   getOD() {
-    return this.mapData.difficulty.OverallDifficulty || 0;
+    if (this.mapData.difficulty) return this.mapData.difficulty.OverallDifficulty || 0;
   }
 
   getHP() {
-    return this.mapData.difficulty.HPDrainRate || 0;
+    if (this.mapData.difficulty) return this.mapData.difficulty.HPDrainRate || 0;
+    return "No available HP Drain or Difficulty is not available yet"
   }
 
   // Timing getter

@@ -69,7 +69,6 @@
         "desc": "Calculate that weird math that gacha games do!",
         "link": "https://raw.githubusercontent.com/LeafiDev/ExtensionPage/refs/heads/main/LamentPercents.js",
         "icon": "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIxNTAuMTIwMyIgaGVpZ2h0PSIxNzMuMzQzOTkiIHZpZXdCb3g9IjAsMCwxNTAuMTIwMywxNzMuMzQzOTkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yNTkuOTM5ODUsLTkzLjMyOCkiPjxnIHN0cm9rZS1taXRlcmxpbWl0PSIxMCI+PHBhdGggZD0iTTI2My42ODk4NSwxMzguODI5MDdsNzEuMzEwMTUsLTQxLjE3MDk0bDcxLjMxMDE1LDQxLjE3MDk0djgyLjM0MTg2bC03MS4zMTAxNSw0MS4xNzA5NGwtNzEuMzEwMTUsLTQxLjE3MDk0eiIgZmlsbD0iI2ZmNmI2YiIgc3Ryb2tlPSIjYzkyYTJhIiBzdHJva2Utd2lkdGg9IjcuNSIvPjx0ZXh0IHRyYW5zZm9ybT0idHJhbnNsYXRlKDI4OC4wMTUwNiwyMTAuMTU5NjkpIHNjYWxlKDIuMzQ5MjUsMi4zNDkyNSkiIGZvbnQtc2l6ZT0iNDAiIHhtbDpzcGFjZT0icHJlc2VydmUiIGZpbGw9IiNjOTJhMmEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmb250LWZhbWlseT0iQXJjaGl2byBCbGFjayIgZm9udC13ZWlnaHQ9Im5vcm1hbCIgdGV4dC1hbmNob3I9InN0YXJ0Ij48dHNwYW4geD0iMCIgZHk9IjAiPiU8L3RzcGFuPjwvdGV4dD48L2c+PC9nPjwvc3ZnPjwhLS1yb3RhdGlvbkNlbnRlcjo3NS4wNjAxNTQ2Nzg4OTkxNTo4Ni42NzE5OTUxOTIwNTIyMi0tPg==",
-        "version": 1.0,
-        "badge": "beta"
+        "version": 1.0
     }
 ]
