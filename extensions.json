@@ -19,8 +19,8 @@
         "version": 0.1,
         "badge": "beta",
         "source": "https://schaledb.com/home",
-        "filters": [ "Utility", "API"],
-        "conditions": ["Nitrobolt: Must be loaded as a local file"]
+        "conditions": ["Nitrobolt: Must be loaded as a local file"],
+        "filters": [ "Utility", "API"]
     },
     {
         "id": 3,
