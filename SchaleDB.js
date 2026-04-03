@@ -9,8 +9,8 @@ class SchaleDB {
     this.grandAssaultRaids = null;
     this.finalRestrictionRaids = null;
     this.selectedRaid = null;
-    this.dataURL = 'https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/data/en/students.min.json';
-    this.raidsURL = 'https://raw.githubusercontent.com/SchaleDB/SchaleDB/main/data/en/raids.min.json';
+    this.dataURL = 'https://schaledb.com/data/en/students.min.json';
+    this.raidsURL = 'https://schaledb.com/data/en/raids.min.json';
     
     // Automatically load databases on extension startup
     this.loadStudents();
@@ -97,14 +97,20 @@ class SchaleDB {
         },
         '---',
         {
-          opcode: 'TA',
+          opcode: 'Raids',
           blockType: Scratch.BlockType.LABEL,
-          text: 'Total Assault'
+          text: 'Raids'
         },
         {
           opcode: 'loadRaids',
           blockType: Scratch.BlockType.COMMAND,
           text: 'Load Raids Database'
+        },
+        '---',
+        {
+          opcode: 'TA',
+          blockType: Scratch.BlockType.LABEL,
+          text: 'Total Assault'
         },
         {
           opcode: 'getTARaidCount',
@@ -224,51 +230,89 @@ class SchaleDB {
 
   loadStudents() {
     return fetch(this.dataURL)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+      })
       .then(data => {
-        this.students = data;
-        return `Loaded ${data.length} students`;
+        // Handle different response formats
+        if (Array.isArray(data)) {
+          this.students = data;
+        } else if (data.Students && Array.isArray(data.Students)) {
+          this.students = data.Students;
+        } else if (typeof data === 'object') {
+          // If it's an object of objects, convert to array
+          this.students = Object.values(data).filter(item => typeof item === 'object');
+        } else {
+          this.students = [];
+        }
+        console.log(`Loaded ${this.students.length} students`);
+        return `Loaded ${this.students.length} students`;
       })
       .catch(error => {
+        console.error('SchaleDB students fetch error:', error);
+        this.students = [];
         return `Error: ${error.message}`;
       });
   }
 
   loadRaids() {
     return fetch(this.raidsURL)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+      })
       .then(data => {
-        const allRaids = data.Raid || [];
+        // Handle different response formats
+        let allRaids = [];
+        if (Array.isArray(data)) {
+          allRaids = data;
+        } else if (data.Raid && Array.isArray(data.Raid)) {
+          allRaids = data.Raid;
+        } else if (data.raids && Array.isArray(data.raids)) {
+          allRaids = data.raids;
+        } else if (typeof data === 'object') {
+          // If it's an object of objects, convert to array
+          allRaids = Object.values(data).filter(item => typeof item === 'object');
+        }
         
-        // Categorize raids by ID range or other properties
-        // Adjust these ranges based on actual raid IDs
-        this.totalAssaultRaids = allRaids.filter(r => r.Id >= 1 && r.Id < 1000);
-        this.grandAssaultRaids = allRaids.filter(r => r.Id >= 1000 && r.Id < 100000);
-        this.finalRestrictionRaids = allRaids.filter(r => r.Id >= 100000);
+        // Categorize raids - TA are 1-999
+        const taRaids = allRaids.filter(r => r.Id && r.Id >= 1 && r.Id < 1000);
+        this.totalAssaultRaids = taRaids.length > 0 ? taRaids : allRaids;
         
         const taCount = this.totalAssaultRaids.length;
-        const gaCount = this.grandAssaultRaids.length;
-        const frCount = this.finalRestrictionRaids.length;
         
-        return `Loaded TA: ${taCount}, GA: ${gaCount}, FR: ${frCount}`;
+        console.log(`Loaded raids - TA: ${taCount}`);
+        return `Loaded TA: ${taCount}`;
       })
       .catch(error => {
+        console.error('SchaleDB raids fetch error:', error);
+        this.totalAssaultRaids = [];
         return `Error: ${error.message}`;
       });
   }
 
   getStudentCount() {
-    return this.students ? this.students.length : 0;
+    return Array.isArray(this.students) ? this.students.length : 0;
   }
 
   getStudentNames() {
-    if (!this.students || this.students.length === 0) {
+    if (!Array.isArray(this.students) || this.students.length === 0) {
       return [{ text: 'Load students first', value: '' }];
     }
-    return this.students.map(s => ({
-      text: s.Name,
-      value: s.Name
-    }));
+    try {
+      return this.students.map(s => ({
+        text: s.Name || s.name || 'Unknown',
+        value: s.Name || s.name || ''
+      }));
+    } catch (error) {
+      console.error('Error mapping student names:', error);
+      return [{ text: 'Error loading names', value: '' }];
+    }
   }
 
   setSelectedStudent(args) {
@@ -335,24 +379,30 @@ class SchaleDB {
   }
 
   getTARaidCount() {
-    return this.totalAssaultRaids ? this.totalAssaultRaids.length : 0;
+    return Array.isArray(this.totalAssaultRaids) ? this.totalAssaultRaids.length : 0;
   }
 
   getTARaidNames() {
-    if (!this.totalAssaultRaids || this.totalAssaultRaids.length === 0) {
+    if (!Array.isArray(this.totalAssaultRaids) || this.totalAssaultRaids.length === 0) {
       return [{ text: 'Load raids first', value: '' }];
     }
-    return this.totalAssaultRaids.map(r => ({
-      text: r.PathName || `Raid ${r.Id}`,
-      value: r.PathName || `Raid ${r.Id}`
-    }));
+    try {
+      return this.totalAssaultRaids.map(r => ({
+        text: r.PathName || r.pathName || `Raid ${r.Id || r.id}`,
+        value: r.PathName || r.pathName || `Raid ${r.Id || r.id}`
+      }));
+    } catch (error) {
+      console.error('Error mapping raid names:', error);
+      return [{ text: 'Error loading raids', value: '' }];
+    }
   }
 
   setSelectedTARaid(args) {
     const raid = this.findTARaid(args.TARAID);
     if (raid) {
       this.selectedRaid = raid;
-      return `Selected ${raid.PathName || raid.Id}`;
+      const raidName = raid.PathName || raid.pathName || raid.Id || raid.id || 'Unknown';
+      return `Selected ${raidName}`;
     }
     return 'Raid not found';
   }
@@ -367,14 +417,15 @@ class SchaleDB {
   }
 
   findTARaid(name) {
-    if (!this.totalAssaultRaids || this.totalAssaultRaids.length === 0) {
+    if (!Array.isArray(this.totalAssaultRaids) || this.totalAssaultRaids.length === 0) {
       return null;
     }
     const searchName = name.toLowerCase();
-    return this.totalAssaultRaids.find(r =>
-      (r.PathName && r.PathName.toLowerCase() === searchName) ||
-      r.Id.toString() === name
-    );
+    return this.totalAssaultRaids.find(r => {
+      const pathName = (r.PathName || r.pathName || '').toLowerCase();
+      const id = (r.Id || r.id || '').toString();
+      return pathName === searchName || id === name;
+    });
   }
 
   getTABossStatByDifficulty(args) {
@@ -426,13 +477,14 @@ class SchaleDB {
   }
 
   findStudent(name) {
-    if (!this.students || this.students.length === 0) {
+    if (!Array.isArray(this.students) || this.students.length === 0) {
       return null;
     }
     const searchName = name.toLowerCase();
-    return this.students.find(s => 
-      s.Name && s.Name.toLowerCase() === searchName
-    );
+    return this.students.find(s => {
+      const studentName = (s.Name || s.name || '').toLowerCase();
+      return studentName === searchName;
+    });
   }
 }
 
