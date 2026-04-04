@@ -320,19 +320,18 @@ class OsuMap {
           const sliderLength = parseFloat(parts[7]) || 0;
           const sliderMultiplier = mapData.difficulty.SliderMultiplier || 1.4;
           const sliderVelocity = sliderMultiplier * 100;
+          const sliderRepeats = parseInt(parts[6]) || 1;
           
-          // Find the timing point for this slider
-          let beatLength = 0;
+          // Find the uninherited (positive beatLength) timing point for this slider
+          let beatLength = 500; // Default fallback
           for (let i = mapData.timingPoints.length - 1; i >= 0; i--) {
-            if (mapData.timingPoints[i].time <= hitObject.time) {
+            if (mapData.timingPoints[i].time <= hitObject.time && mapData.timingPoints[i].beatLength > 0) {
               beatLength = mapData.timingPoints[i].beatLength;
               break;
             }
           }
           
-          if (beatLength === 0) beatLength = 500; // Default fallback
-          
-          const endTime = hitObject.time + (sliderLength / sliderVelocity) * beatLength;
+          const endTime = hitObject.time + (sliderLength / sliderVelocity) * beatLength * sliderRepeats;
           
           // Create and push a slider end point
           const sliderEnd = {
