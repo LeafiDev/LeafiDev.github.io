@@ -1,0 +1,8 @@
+[
+    {
+        "id": 0,
+        "Name": "Youtube",
+        "icon": "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIxMjkuNDI5OTkiIGhlaWdodD0iMTMwLjE4NjkzIiB2aWV3Qm94PSIwLDAsMTI5LjQyOTk5LDEzMC4xODY5MyI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI3MC4yODUwMSwtMTE1LjI4NTAxKSI+PGcgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjcuNSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIj48cGF0aCBkPSJNMzk1Ljk2NDk5LDExOS4wMzUwMXY4MS4yODY2NmwtNjAuOTY0OTksNDAuNjQzMzNsLTYwLjk2NDk5LC00MC42NDMzM3YtODEuMjg2NjZ6IiBmaWxsPSIjZmYwMDAwIi8+PHBhdGggZD0iTTM2NS4zODk2NywxNjkuOTgyNzNsLTU0Ljc0ODk2LDI3LjM3NDQ4di01NC43NDg5NnoiIGZpbGw9IiNmZmZmZmYiLz48L2c+PC9nPjwvc3ZnPjwhLS1yb3RhdGlvbkNlbnRlcjo2NC43MTQ5OTQ2MjY3NzEyNzo2NC43MTQ5OTQ2MjY3NzEzNi0tPg==",
+        "link": "https://www.youtube.com/@LeafiDev/videos"
+    }
+]
