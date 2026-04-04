@@ -312,6 +312,20 @@ class OsuMap {
         if (coords.length === 2) {
           hitObject.endX = parseInt(coords[0]);
           hitObject.endY = parseInt(coords[1]);
+          
+          // Push the slider
+          mapData.hitObjects.push(hitObject);
+          
+          // Create and push a slider end point
+          const sliderEnd = {
+            x: hitObject.endX,
+            y: hitObject.endY,
+            time: hitObject.time,
+            type: 'SliderEnd',
+            hitsound: 0
+          };
+          mapData.hitObjects.push(sliderEnd);
+          return;
         }
       }
     }
