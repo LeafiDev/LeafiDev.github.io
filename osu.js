@@ -316,11 +316,29 @@ class OsuMap {
           // Push the slider
           mapData.hitObjects.push(hitObject);
           
+          // Calculate slider end time
+          const sliderLength = parseFloat(parts[7]) || 0;
+          const sliderMultiplier = mapData.difficulty.SliderMultiplier || 1.4;
+          const sliderVelocity = sliderMultiplier * 100;
+          
+          // Find the timing point for this slider
+          let beatLength = 0;
+          for (let i = mapData.timingPoints.length - 1; i >= 0; i--) {
+            if (mapData.timingPoints[i].time <= hitObject.time) {
+              beatLength = mapData.timingPoints[i].beatLength;
+              break;
+            }
+          }
+          
+          if (beatLength === 0) beatLength = 500; // Default fallback
+          
+          const endTime = hitObject.time + (sliderLength / sliderVelocity) * beatLength;
+          
           // Create and push a slider end point
           const sliderEnd = {
             x: hitObject.endX,
             y: hitObject.endY,
-            time: hitObject.time,
+            time: Math.round(endTime),
             type: 'SliderEnd',
             hitsound: 0
           };
