@@ -34,6 +34,11 @@ class OsuMap {
             }
           }
         },
+        {
+          opcode: 'isChartLoaded',
+          blockType: Scratch.BlockType.BOOLEAN,
+          text: 'chart loaded?'
+        },
         '---',
         {
           opcode: 'metadataLabel',
@@ -173,6 +178,17 @@ class OsuMap {
             }
           }
         },
+        {
+          opcode: 'getHitObjectHitsound',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'hit object [INDEX] hitsound',
+          arguments: {
+            INDEX: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 1
+            }
+          }
+        },
         '---',
         {
           opcode: 'conversionLabel',
@@ -269,6 +285,10 @@ class OsuMap {
     }
   }
 
+  isChartLoaded() {
+    return this.mapData && this.mapData.hitObjects && this.mapData.hitObjects.length > 0;
+  }
+
   parseHitObject(line, mapData) {
     mapData = mapData || this.mapData;
     const parts = line.split(',');
@@ -278,7 +298,8 @@ class OsuMap {
       x: parseInt(parts[0]),
       y: parseInt(parts[1]),
       time: parseInt(parts[2]),
-      type: this.decodeHitObjectType(parseInt(parts[3]))
+      type: this.decodeHitObjectType(parseInt(parts[3])),
+      hitsound: parseInt(parts[4]) || 0
     };
 
     // Extract slider end position if this is a slider
@@ -408,6 +429,24 @@ class OsuMap {
       return this.mapData.hitObjects[index].type;
     }
     return 'Unknown';
+  }
+
+  getHitObjectHitsound(args) {
+    const index = parseInt(args.INDEX) - 1;
+    if (index >= 0 && index < this.mapData.hitObjects.length) {
+      const hitsound = this.mapData.hitObjects[index].hitsound || 0;
+      return this.decodeHitsound(hitsound);
+    }
+    return 'None';
+  }
+
+  decodeHitsound(hitsoundInt) {
+    const sounds = [];
+    if (hitsoundInt & 1) sounds.push('Normal');
+    if (hitsoundInt & 2) sounds.push('Whistle');
+    if (hitsoundInt & 4) sounds.push('Finish');
+    if (hitsoundInt & 8) sounds.push('Clap');
+    return sounds.length > 0 ? sounds.join(', ') : 'None';
   }
 
   // Conversion functions
